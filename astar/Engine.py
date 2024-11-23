@@ -1,7 +1,7 @@
 import pygame
 import test
 
-class Graphics:
+class Engine:
     def __init__(self,windowWidth,windowHeight,cellSize):
         pygame.init()
         pygame.display.set_caption("Astart Project_202218005")  # 타이틀 변경

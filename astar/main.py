@@ -1,5 +1,5 @@
-from Graphics import *
+from Engine import *
 
-Engine = Graphics(800,800,20)
+engine = Engine(800,800,20)
 
-Engine.run()
+engine.run()
