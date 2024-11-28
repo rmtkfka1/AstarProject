@@ -1,5 +1,5 @@
 #pragma once
-
+#define STB_IMAGE_IMPLEMENTATION
 #include <iostream>
 #include <vector>
 #include <Windows.h>
@@ -9,7 +9,8 @@
 #include <unordered_map>
 #include <set>
 #include <unordered_set>
-
+#include "stb_image.h"
+#include <assert.h>
 
 using int8 = __int8;
 using int16 = __int16;

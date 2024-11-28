@@ -23,9 +23,9 @@ public:
 private:
 	void GenerateMap();
 	TileType GetTileType(const Pos& pos);
-	Color	 GetTileColor(const Pos&color);
+	Color	 GetTileColor(const Pos& pos);
 	Pos		 GetEnterPos() { return Pos(1, 1); }
-	Pos		 GetExitPos() { return Pos(_size-1, _size-1); }
+	Pos		 GetExitPos() { return Pos(_size-2, _size-2); }
 
 
 private:

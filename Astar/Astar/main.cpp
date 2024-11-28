@@ -9,6 +9,9 @@ int main()
 	shared_ptr<Player> player = make_shared<Player>();
 	shared_ptr<Board> board = make_shared<Board>();
 
+
+	board->Init(25);
+
 	while (1)
 	{
 		board->Render();
