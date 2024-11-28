@@ -7,7 +7,7 @@ class Player
 {
 	enum
 	{
-		MOVE_TICK = 400
+		MOVE_TICK = 100
 	};
 
 public:
