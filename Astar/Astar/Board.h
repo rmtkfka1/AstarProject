@@ -1,6 +1,8 @@
 #pragma once
 #include "ConsoleHelper.h"
 
+class Player;
+
 enum class TileType
 {
 	NONE=0,
@@ -17,20 +19,21 @@ public:
 	Board();
 	~Board();
 
-	void Init(int32 size);
+	void Init(int32 size , Player* player);
 	void Render();
+
+	TileType GetTileType(const Pos& pos);
+	Color	 GetTileColor(const Pos& pos);
+	Pos		 GetStartPos() { return Pos(1, 1); }
+	Pos		 GetEndPos() { return Pos(_size - 2, _size - 2); }
 
 private:
 	void GenerateMap();
-	TileType GetTileType(const Pos& pos);
-	Color	 GetTileColor(const Pos& pos);
-	Pos		 GetEnterPos() { return Pos(1, 1); }
-	Pos		 GetExitPos() { return Pos(_size-2, _size-2); }
-
 
 private:
-	const char* TILE = "бс";
-	TileType _board[BOARDMAXSIZE][BOARDMAXSIZE] = {};
-	int32	 _size = 0;
+	const char*		TILE = "бс";
+	TileType		_board[BOARDMAXSIZE][BOARDMAXSIZE] = {};
+	int32			_size = 0;
+	Player*			_player;
 };
 

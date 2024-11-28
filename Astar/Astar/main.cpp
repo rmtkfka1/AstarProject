@@ -6,17 +6,23 @@ int main()
 {
 	::srand(static_cast<uint32>(time(nullptr)));
 
-	shared_ptr<Player> player = make_shared<Player>();
-	shared_ptr<Board> board = make_shared<Board>();
+	Player* player = new Player();
+	Board* board = new Board();
 
+	board->Init(25,player);
+	player->Init(board);
 
-	board->Init(25);
+	uint64 lastTick = 0;
 
 	while (1)
 	{
+		uint64 currentTick = ::GetTickCount64();
+		const uint64 deltaTime = currentTick - lastTick;
+		lastTick = currentTick;
+		player->Update(deltaTime);
 		board->Render();
 	}
 
-
-
+	delete board;
+	delete player;
 }

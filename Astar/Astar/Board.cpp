@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Board.h"
-
+#include "Player.h"
 
 Board::Board()
 {
@@ -10,9 +10,10 @@ Board::~Board()
 {
 }
 
-void Board::Init(int32 size)
+void Board::Init(int32 size ,Player* player)
 {
 	_size = size;
+	_player = player;
 
 	GenerateMap();
 }
@@ -62,18 +63,17 @@ void Board::GenerateMap()
 				continue;
 			}
 
-
 			//하단도달 우측으로 벽뚫기
 			if (y == _size - 2)
 			{
-				_board[x+1][y] = TileType::EMPTY;
+				_board[x + 1][y] = TileType::EMPTY;
 				continue;
 			}
 
 			//우측도달 하단으로 벽뚫기
 			if (x == _size - 2)
 			{
-				_board[x][y+1] = TileType::EMPTY;
+				_board[x][y + 1] = TileType::EMPTY;
 				continue;
 			}
 
@@ -87,17 +87,12 @@ void Board::GenerateMap()
 			else
 			{
 				//우측으로 벽뚫기
-				_board[x+1][y] = TileType::EMPTY;
+				_board[x + 1][y] = TileType::EMPTY;
 			}
 		}
 	}
-	
 
-
-
-
-
-}
+};
 
 TileType Board::GetTileType(const Pos& pos)
 {
@@ -112,7 +107,12 @@ TileType Board::GetTileType(const Pos& pos)
 
 Color Board::GetTileColor(const Pos& pos)
 {
-	if (GetExitPos() == pos)
+	if (_player && _player->GetPos() == pos)
+	{
+		return Color::YELLOW;
+	}
+
+	if (GetEndPos() == pos)
 	{
 		return Color::BLUE;
 	}
