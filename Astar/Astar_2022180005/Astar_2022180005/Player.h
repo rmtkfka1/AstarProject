@@ -31,8 +31,9 @@ private:
 
 	uint64 _sumTime = 0;
 	queue<Pos> _path;
-
+	vector<pair<Pos,int>>_prevPos;
 private:
+	int num = 0;
 	HWND _hwnd;
 	HDC _backBuffer;
 	Texture _texture;

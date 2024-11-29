@@ -27,7 +27,5 @@ private:
 	HDC		_backBuffer;
 	HBITMAP _bufferBitmap;
 	HBITMAP _oldBitmap;
-
-
 };
 

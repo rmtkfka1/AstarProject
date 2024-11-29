@@ -14,7 +14,7 @@ int main()
                      NULL,
                      NULL,
                      NULL,
-                     L"Game",
+                     L"2022180005 Astar",
                      NULL };
 
     RegisterClassEx(&wc);
@@ -23,7 +23,7 @@ int main()
 
     AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 
-    HWND hwnd = CreateWindow(wc.lpszClassName, L"Game",
+    HWND hwnd = CreateWindow(wc.lpszClassName, L"2022180005 Astar",
         WS_OVERLAPPEDWINDOW,
         100, // 윈도우 좌측 상단의 x 좌표
         100, // 윈도우 좌측 상단의 y 좌표
@@ -57,8 +57,6 @@ int main()
     DestroyWindow(hwnd);
     UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     return 0;
 }

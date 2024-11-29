@@ -4,12 +4,13 @@
 
 void Player::Init(HWND hwnd, HDC backBuffer, Board* board)
 {
+	_prevPos.clear();
+	num = 0;
 	_pos = board->GetStartPos();
 	_board = board;
 	_hwnd = hwnd;
 	_backBuffer = backBuffer;
 	CalculatePath();
-
 	_texture.LoadTexture("mario.jpg", _backBuffer);
 }
 
@@ -26,14 +27,26 @@ void Player::Update(uint64 deltaTime)
 
 		Pos nextPos = _path.front();
 		_path.pop();
+		_prevPos.push_back(make_pair(_pos, num));
 		_pos = nextPos;
+		num++;
 	}
+
+
 
 }
 
 void Player::Render()
 {
+
+	for (int i = 0; i < _prevPos.size(); ++i)
+	{
+		string str =to_string(_prevPos[i].second);
+		TextOutA(_backBuffer, _prevPos[i].first.x * TILESIZE, _prevPos[i].first.y * TILESIZE, str.c_str(), str.size());
+	}
+
 	_texture.RenderImage(_backBuffer, _pos.x* TILESIZE, _pos.y* TILESIZE);
+
 }
 
 void Player::CalculatePath()
