@@ -19,7 +19,7 @@ Engine::~Engine()
 
 }
 
-void Engine::Init(HWND hwnd)
+void Engine::Init(HWND hwnd,int value)
 {
 	_hwnd = hwnd;
 
@@ -44,7 +44,7 @@ void Engine::Init(HWND hwnd)
     _board = new Board();
 
     _board->Init(_hwnd, _backBuffer, 25, _player);
-    _player->Init(_hwnd,_backBuffer,_board);
+    _player->Init(_hwnd,_backBuffer,_board,value);
 
     KeyManager::GetInstance()->Init(_hwnd);
 
@@ -59,11 +59,20 @@ void Engine::Update()
     KeyManager::GetInstance()->Update();
 
 
-    if (KeyManager::GetInstance()->GetButtonDown(KEY_TYPE::R))
+    if (KeyManager::GetInstance()->GetButtonDown(KEY_TYPE::ONE))
     {
-        Init(_hwnd);
+        Init(_hwnd,1);
     }
 
+    if (KeyManager::GetInstance()->GetButtonDown(KEY_TYPE::TWO))
+    {
+        Init(_hwnd, 2);
+    }
+
+    if (KeyManager::GetInstance()->GetButtonDown(KEY_TYPE::THREE))
+    {
+        Init(_hwnd, 3);
+    }
 
     _player->Update(deltaTime);
 }
@@ -91,11 +100,14 @@ void Engine::Render()
     _board->Render();
     _player->Render();
 
-    TextRender(500,0,"만든이:2022180005 김상혁");
+    TextRender(550,0,"만든이:2022180005 김상혁");
 
-    TextRender(500, 20, "WINAPI 를 사용하여 구현");
-    TextRender(500, 40, "동적지형생성 및 에이스타 알고리즘 적용");
-    TextRender(500, 60, "R:리셋");
+    TextRender(550, 20,     "WINAPI 를 사용하여 구현");
+    TextRender(550, 40,     "동적지형생성 및 여러가지 길찾기 알고리즘 적용");
+    TextRender(550, 60,     "-------------------------------------키입력 안내-------------------------------------");
+    TextRender(550, 80,     "1: 우수법(RightHand) 방법으로 길찾기");
+    TextRender(550, 100,    "2: BFS(너비우선) 방법으로 길찾기");
+    TextRender(550, 120,    "3: DFS(깊이우선) 방법으로 길찾기");
     // ----- 실제 렌더링 코드 끝 -----
 
 

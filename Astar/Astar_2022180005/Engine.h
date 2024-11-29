@@ -10,7 +10,7 @@ public:
 	Engine();
 	~Engine();
 
-	void Init(HWND hwnd);
+	void Init(HWND hwnd , int value);
 	void Update();
 	void RenderBegin();
 	void RenderEnd();

@@ -24,10 +24,12 @@ using uint64 = unsigned __int64;
 
 using namespace std;
 
-#define WINDOW_WIDTH 800
+#define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 600
 
 #define TILESIZE 20
+
+
 
 struct Pos
 {
@@ -90,6 +92,24 @@ struct Pos
 
 };
 
+struct  AstarNode
+{
+	AstarNode(int32 f, int32 g, Pos pos) :f(f), g(g), pos(pos) {};
+
+	bool operator<(const AstarNode& other) const
+	{
+		return f < other.f;
+	}
+
+	bool operator>(const AstarNode& other) const
+	{
+		return f > other.f;
+	}
+
+	int32 f{};
+	int32 g{};
+	Pos pos{};
+};
 
 enum Dir
 {

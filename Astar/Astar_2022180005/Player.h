@@ -5,13 +5,10 @@ class Board;
 
 class Player
 {
-	enum
-	{
-		MOVE_TICK = 100
-	};
+	
 
 public:
-	void Init(HWND hwnd, HDC backBuffer,Board* board);
+	void Init(HWND hwnd, HDC backBuffer,Board* board,int value);
 	void Update(uint64 deltaTime);
 	void Render();
 
@@ -20,11 +17,16 @@ public:
 	Pos GetPos() { return _pos; }
 
 private:
-	void CalculatePath();
+	void CalculatePath_RightHand();
+	void CalculatePath_BFS();
+	void CalculatePath_DFS();
+	void CalculatePath_Astar();
+	bool Dfs(Pos pos, vector<vector<bool>>& visited);
 	bool CanGo(Pos pos);
 
 
 private:
+	int MOVE_TICK = 100;
 	Pos _pos;
 	int32 _dir = DIR_UP;
 	Board* _board;

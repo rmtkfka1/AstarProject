@@ -38,7 +38,7 @@ int main()
 
     unique_ptr<Engine> engine = make_unique<Engine>();
 
-    engine->Init(hwnd);
+    engine->Init(hwnd,1);
 
     while (WM_QUIT != msg.message) 
     {
