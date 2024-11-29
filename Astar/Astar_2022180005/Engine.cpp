@@ -114,6 +114,9 @@ void Engine::Render()
     TextRender(550, 100,    "2: BFS(너비우선) 방법으로 길찾기");
     TextRender(550, 120,    "3: DFS(깊이우선) 방법으로 길찾기");
     TextRender(550, 140,    "4: 우수법(RightHand) 방법으로 길찾기");
+
+    TextRender(550, 180,    "UP키  :         속도증가");
+    TextRender(550, 200,    "DOWN키:     속도감소");
     // ----- 실제 렌더링 코드 끝 -----
 
 
