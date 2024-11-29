@@ -74,6 +74,11 @@ void Engine::Update()
         Init(_hwnd, 3);
     }
 
+    if (KeyManager::GetInstance()->GetButtonDown(KEY_TYPE::FOUR))
+    {
+        Init(_hwnd, 4);
+    }
+
     _player->Update(deltaTime);
 }
 
@@ -105,9 +110,10 @@ void Engine::Render()
     TextRender(550, 20,     "WINAPI 를 사용하여 구현");
     TextRender(550, 40,     "동적지형생성 및 여러가지 길찾기 알고리즘 적용");
     TextRender(550, 60,     "-------------------------------------키입력 안내-------------------------------------");
-    TextRender(550, 80,     "1: 우수법(RightHand) 방법으로 길찾기");
+    TextRender(550, 80,     "1: Astar 방법으로 길찾기");
     TextRender(550, 100,    "2: BFS(너비우선) 방법으로 길찾기");
     TextRender(550, 120,    "3: DFS(깊이우선) 방법으로 길찾기");
+    TextRender(550, 140,    "4: 우수법(RightHand) 방법으로 길찾기");
     // ----- 실제 렌더링 코드 끝 -----
 
 

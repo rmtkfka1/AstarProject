@@ -14,7 +14,7 @@ void Player::Init(HWND hwnd, HDC backBuffer, Board* board, int value)
 
 	if (value == 1)
 	{
-		CalculatePath_RightHand();
+		CalculatePath_Astar();
 	}
 	else if (value == 2)
 	{
@@ -26,7 +26,7 @@ void Player::Init(HWND hwnd, HDC backBuffer, Board* board, int value)
 	}
 	else if (value == 4)
 	{
-		CalculatePath_Astar();
+		CalculatePath_RightHand();
 	}
 	
 
@@ -235,6 +235,76 @@ bool Player::Dfs(Pos pos, vector<vector<bool>>& visited)
 
 void Player::CalculatePath_Astar()
 {
+	Pos start = _pos;
+	Pos dest = _board->GetEndPos();
+
+	Pos front[4] =
+	{
+		Pos(-1, 0), // UP
+		Pos(0, -1), // LEFT
+		Pos(1, 0), // DOWN
+		Pos(0, 1), // RIGHT
+	};
+
+	int32 cost[4] =
+	{
+		1,
+		1,
+		1,
+		1,
+	};
+
+	const int32 size = _board->GetSize();
+	vector<vector<int32>> best(size, vector<int32>(size, INT32_MAX));
+	vector<vector<bool>> closedList(size, vector<bool>(size, false));
+	priority_queue<AstarNode, vector<AstarNode>, greater<AstarNode>> pq;
+
+	{
+		int32 g = 0;
+		int32 h =   (dest.x - start.x) * (dest.x - start.x) + (dest.y - start.y) * (dest.y - start.y);
+		pq.push(AstarNode(g + h, g, start));
+		best[start.x][start.y] = g + h;
+	}
+
+	while (pq.empty() == false)
+	{
+		AstarNode node = pq.top();
+		pq.pop();
+
+		if (closedList[node.pos.x][node.pos.y])
+			continue;
+
+
+		closedList[node.pos.x][node.pos.y] = true;
+		_path.push(node.pos);
+
+		if (node.pos == dest)
+			break;
+
+		for (int32 dir = 0; dir < DIR_COUNT; dir++)
+		{
+			Pos nextPos = node.pos + front[dir];
+
+			if (CanGo(nextPos) == false)
+				continue;
+
+			if (closedList[nextPos.x][nextPos.y])
+				continue;
+
+			int32 g = node.g + cost[dir];
+			int32 h =  (dest.x - nextPos.x) * (dest.x - nextPos.x) + (dest.y - nextPos.y) * (dest.y - nextPos.y);
+
+			if (best[nextPos.x][nextPos.y] <= g + h)
+				continue;
+
+			best[nextPos.x][nextPos.y] = g + h;
+			pq.push(AstarNode(g + h, g, nextPos));
+		}
+
+	}
+
+
+
 
 }
 

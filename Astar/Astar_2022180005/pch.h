@@ -13,6 +13,7 @@
 #include "Engine.h"
 #include "Texture.h"
 #include <string>
+#include <math.h>
 using int8 = __int8;
 using int16 = __int16;
 using int32 = __int32;
